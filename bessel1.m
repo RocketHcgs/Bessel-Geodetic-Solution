@@ -2,6 +2,7 @@ a = 6378137; %WGS-84
 b = 6356752.3142;
 e2 = 0.00669437999013;
 eps2 = 0.00673949674227;
+p0 = 206265; %Rho
 
 %input B1 L1 A1 S output B2 L2 A2
 B1 = deg2rad(dms2degrees(B1));
@@ -9,6 +10,7 @@ L1 = deg2rad(dms2degrees(L1));
 A1 = deg2rad(dms2degrees(A1));
 
 %1
+W1 = sqrt(1-e2*sin(B1)^2);
 U1 = atan(sqrt(1-e2)*tan(B1)); %1.1
 sinA0 = cos(U1)*sin(A1);
 cosA0 = sqrt(1-sinA0^2);
@@ -23,7 +25,7 @@ while(Dsigma>0.001)
     sigma0 = sigma;
     sigma = alpha*S+beta*sin(sigma0)*cos(2*sigma1+sigma0);
     sigma = sigma + gamma*sin(2*sigma0)*cos(4*sigma1+2*sigma0);
-    Dsigma = abs(sigma - sigma0)*206265;
+    Dsigma = abs(sigma - sigma0)*p0;
 end %1.3
 %2
 sinA2 = cos(U1)*sin(A1);
@@ -69,6 +71,25 @@ xx = xx + gamma1*sin(2*sigma)*cos(4*sigma1+2*sigma);
 l = lambda-sinA0*xx;
 L2 = L1+l; %3.2
 
+disp(W1);
+disp(sin(U1));
+disp(cos(U1));
+disp(sin(A1));
+disp(cos(A1));
+disp(cosA0^2);
+disp(cot(sigma1));
+disp(sin(2*sigma1));
+disp(cos(2*sigma1));
+disp(p0*alpha); %warning
+disp(p0*beta); %warning
+disp(sigma0);
+disp(sin(2*sigma1+2*sigma0));
+disp(cos(2*sigma1+2*sigma0));
+disp(sigma); %sign -
+disp(p0*sinA0*xx); %delta
+disp(sin(sigma));
+disp(cos(sigma));
+disp(rad2deg(lambda));
 disp(rad2deg(B2));
 disp(rad2deg(L2));
 disp(rad2deg(A2));
