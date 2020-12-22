@@ -5,10 +5,10 @@ eps2 = 0.00673949674227;
 p0 = 206265; %Rho
 
 %输入：B1(dms) L1(dms) B2(dms) L2(dms)
-B1 = deg2rad(dms2degrees(B1));
-L1 = deg2rad(dms2degrees(L1));
-B2 = deg2rad(dms2degrees(B2));
-L2 = deg2rad(dms2degrees(L2));
+%B1 = deg2rad(dms2degrees(B1));
+%L1 = deg2rad(dms2degrees(L1));
+%B2 = deg2rad(dms2degrees(B2));
+%L2 = deg2rad(dms2degrees(L2));
 
 %1 将椭球面元素投影到球面上
 W1 = sqrt(1-e2*sin(B1)^2);
@@ -61,6 +61,7 @@ k2 = eps2*cosA0^2; k4 = k2^2; k6 = k2^3;
 alpha = (1-k2/4 + 7*k4/64 - 15*k6/256)/b;
 beta = k2/4 - k4/8 +37*k6/512;
 gamma = k4/128-k6/128;
+x = 2*a1-cosA0^2*cossig;
 S = gamma*sin(2*sigma)*cos(4*sigma1+2*sigma);
 S = (sigma-beta*sin(sigma)*cos(2*sigma1+sigma) - S) / alpha;
 sinA2 = cos(U1)*sin(A1);
@@ -81,6 +82,10 @@ if(sinA1>0 && tanA2<0)
 end
 
 %打印反算表格
+disp(degrees2dms(rad2deg(B1)));
+disp(degrees2dms(rad2deg(L1)));
+disp(degrees2dms(rad2deg(B2)));
+disp(degrees2dms(rad2deg(L2)));
 disp(W1);
 disp(W2);
 disp(sin(U1));
@@ -93,12 +98,18 @@ disp(b1);
 disp(b2);
 disp(p);
 disp(q);
-disp(rad2deg(A1));
 disp(sinsig);
 disp(cossig);
 disp(sigma);
 disp(sinA0);
-disp(alpha); %warning
+disp(x); %x
+disp((cosA0^4-2*x^2)*cossig); %y
+disp(alpha1);
+disp(beta1);
 disp(p0*sinA0*xx); %delta
-disp(rad2deg(A2));
+disp(1/alpha); %A
+disp(beta/alpha/cosA0^2); %B"
+disp(2*gamma/alpha/cosA0^4); %C"
+disp(degrees2dms(rad2deg(A1)));
+disp(degrees2dms(rad2deg(A2)));
 disp(S);

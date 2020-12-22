@@ -72,17 +72,25 @@ l = lambda-sinA0*xx; %3.2 将球面经差化为椭球面经差
 L2 = L1+l;
 
 %打印正算表格
+disp(degrees2dms(rad2deg(B1)));
+disp(degrees2dms(rad2deg(L1)));
+disp(degrees2dms(rad2deg(A1)));
+disp(S);
 disp(W1);
 disp(sin(U1));
 disp(cos(U1));
 disp(sin(A1));
 disp(cos(A1));
+disp(sinA0);
 disp(cosA0^2);
 disp(cot(sigma1));
 disp(sin(2*sigma1));
 disp(cos(2*sigma1));
+disp(1/alpha); %A
+disp(beta/alpha/2); %B
+disp(gamma/alpha); %C
 disp(p0*alpha1);
-disp(p0*beta1/2); %warning
+disp(p0*beta1/2);
 disp(sigma0);
 disp(sin(2*sigma1+2*sigma0));
 disp(cos(2*sigma1+2*sigma0));
@@ -90,7 +98,7 @@ disp(sigma);
 disp(p0*sinA0*xx); %delta
 disp(sin(sigma));
 disp(cos(sigma));
-disp(rad2deg(lambda));
-disp(rad2deg(B2));
-disp(rad2deg(L2));
-disp(rad2deg(A2));
+disp(degrees2dms(rad2deg(lambda)));
+disp(degrees2dms(rad2deg(B2)));
+disp(degrees2dms(rad2deg(L2)));
+disp(degrees2dms(rad2deg(A2)));
