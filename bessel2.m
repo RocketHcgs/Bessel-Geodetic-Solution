@@ -4,13 +4,13 @@ e2 = 0.00669437999013;
 eps2 = 0.00673949674227;
 p0 = 206265; %Rho
 
-%input B1 L1 B2 L2 output A1 A2 S
-%B1 = deg2rad(dms2degrees(B1));
-%L1 = deg2rad(dms2degrees(L1));
-%B2 = deg2rad(dms2degrees(B2));
-%L2 = deg2rad(dms2degrees(L2));
+%输入：B1(dms) L1(dms) B2(dms) L2(dms)
+B1 = deg2rad(dms2degrees(B1));
+L1 = deg2rad(dms2degrees(L1));
+B2 = deg2rad(dms2degrees(B2));
+L2 = deg2rad(dms2degrees(L2));
 
-%1
+%1 将椭球面元素投影到球面上
 W1 = sqrt(1-e2*sin(B1)^2);
 W2 = sqrt(1-e2*sin(B2)^2);
 U1 = atan(sqrt(1-e2)*tan(B1));
@@ -55,8 +55,8 @@ while(Dlambda>0.001)
     xx = xx + gamma1*sin(2*sigma)*cos(4*sigma1+2*sigma);
     lambda = l+sinA0*xx;
     Dlambda = abs(lambda - lambda0)*p0;
-end %1.2
-%2
+end %1.2 计算球面经差lambda
+%2 将球面元素环算到椭球面
 k2 = eps2*cosA0^2; k4 = k2^2; k6 = k2^3;
 alpha = (1-k2/4 + 7*k4/64 - 15*k6/256)/b;
 beta = k2/4 - k4/8 +37*k6/512;
@@ -80,6 +80,7 @@ if(sinA1>0 && tanA2<0)
     A2 = 2*pi-A2;
 end
 
+%打印反算表格
 disp(W1);
 disp(W2);
 disp(sin(U1));
