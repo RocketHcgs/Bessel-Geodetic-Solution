@@ -5,10 +5,22 @@ eps2 = 0.00673949674227;
 p0 = 206265; %Rho
 
 %输入：B1(dms) L1(dms) B2(dms) L2(dms)
-%B1 = deg2rad(dms2degrees(B1));
-%L1 = deg2rad(dms2degrees(L1));
-%B2 = deg2rad(dms2degrees(B2));
-%L2 = deg2rad(dms2degrees(L2));
+file = fopen('bessel2.txt');
+cell = textscan(file,"%f");
+fclose(file);
+cell = cell2mat(cell);
+B1 = [cell(1),cell(2),cell(3)];
+L1 = [cell(4),cell(5),cell(6)];
+B2 = [cell(7),cell(8),cell(9)];
+L2 = [cell(10),cell(11),cell(12)];
+disp(B1);
+disp(L1);
+disp(B2);
+disp(L2);
+B1 = deg2rad(dms2degrees(B1));
+L1 = deg2rad(dms2degrees(L1));
+B2 = deg2rad(dms2degrees(B2));
+L2 = deg2rad(dms2degrees(L2));
 
 %1 将椭球面元素投影到球面上
 W1 = sqrt(1-e2*sin(B1)^2);
@@ -82,10 +94,6 @@ if(sinA1>0 && tanA2<0)
 end
 
 %打印反算表格
-disp(degrees2dms(rad2deg(B1)));
-disp(degrees2dms(rad2deg(L1)));
-disp(degrees2dms(rad2deg(B2)));
-disp(degrees2dms(rad2deg(L2)));
 disp(W1);
 disp(W2);
 disp(sin(U1));
